@@ -26,22 +26,26 @@
 <?php
 
 $obj = new GetData();
-
-
 if(isset($_POST["submit"]) and  !empty($_POST["textarea1"])){
     $obj->new_message($_POST["textarea1"], $_SESSION["PID"]);
+}
+refresh_board($obj);
 
-    $board_message = $obj->get_board_message(); ?>
+
+function refresh_board($obj){
+$board_message = $obj->get_board_message(); ?>
     <div id="board" style="border: 1px solid black;" align="center">
         <?php for($i = count($board_message) - 1; $i >= 0; $i--){ ?>
-        <div id="subboard" >
-            <?php $user_name = $obj->get_username($board_message[$i]["user_id"]);?>
-            <p align="left"> <?php echo $user_name ?></p>
-            <p align="center"> <?php echo $board_message[$i]["message"] ?> </p>
-            <p align="right"> <?php echo $board_message[$i]["post_time"] ?> </p>
-        </div>
-            <?php } ?>
-   </div>
-<?php } ?>
+            <div id="subboard" >
+                <?php $user_name = $obj->get_username($board_message[$i]["user_id"]);?>
+                <p align="left"> <?php echo $user_name ?></p>
+                <p align="center"> <?php echo $board_message[$i]["message"] ?> </p>
+                <p align="right"> <?php echo $board_message[$i]["post_time"] ?> </p>
+            </div>
+        <?php } ?>
+    </div>
+    <?php
+}
+?>
     </body>
 </html>
