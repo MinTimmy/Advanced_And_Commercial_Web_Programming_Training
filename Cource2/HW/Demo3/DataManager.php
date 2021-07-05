@@ -25,7 +25,7 @@ class DatabaseFunction
 
     public function get_board_message()
     {
-        $db_result = $this->db_link->query("SELECT * FROM `board`  WHERE 1 ");
+        $db_result = $this->db_link->query("SELECT * FROM `board` ORDER BY `post_time` DESC LIMIT 0,100");
 
         $db_result->execute();
         $board_result = $db_result->fetchAll(PDO::FETCH_BOTH);
