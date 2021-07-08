@@ -13,7 +13,7 @@
         <br>
         <input type="submit" name="submit" value="submit">
     </form>
-    <button onclick="window.location.href = 'login2.php';">login</button>
+    <button onclick="window.location.href = 'login.php';">login</button>
     <button onclick="window.location.href = 'index.php';">logout</button>
     </center>
 <?php
@@ -22,7 +22,7 @@ include("DataManager.php");
 $obj = new DatabaseFunction();
 if(isset($_POST["submit"]) and  !empty($_POST["textarea1"])){
     if(strlen($_POST["textarea1"]) <= 140){
-        $obj->newMessage($_POST["textarea1"], $_SESSION["PID"]);
+        $obj->newMessage($_POST["textarea1"], $_SESSION["user_id"]);
     }
     else{?>
         <script> alert("字數不可以超過140") </script>
@@ -38,7 +38,7 @@ function refreshBoard($obj)
     <div id="board" style="border: 1px solid black;" align="center">
         <?php foreach($board_message as $data){ ?>
             <div id="subboard">
-                <?php $user_name = $obj->getUsername($data["user_id"]);?>
+                <?php   $user_name = $obj->getUsername($data["user_id"]);?>
                 <p align="left"> <?php echo $user_name ?></p>
                 <p align="center"> <?php echo $data["message"] ?> </p>
                 <p align="right"> <?php echo $data["post_time"] ?> </p>

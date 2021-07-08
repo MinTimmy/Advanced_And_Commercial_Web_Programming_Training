@@ -63,14 +63,14 @@ class DatabaseFunction
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_BOTH);
 
-        if(empty($re)){
+        if(empty($res)){
             return true;
         }
         else{
             return false;
         }
     }
-    public  function loginCheck($username, $password): bool
+    public  function loginCheck($username, $password)
     {
            $squery = "SELECT * FROM `user` WHERE `username` = :username";
            $stmt = $this->db_link->prepare($squery);
@@ -83,7 +83,7 @@ class DatabaseFunction
            }
            else{
                if(password_verify($password, $res[0]['password'])){
-                   return true;
+                   return $res[0]['id'];
                }
                else{
                    return false;

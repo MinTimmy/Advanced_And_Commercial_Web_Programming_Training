@@ -24,7 +24,10 @@ if(isset($_POST["submit"])){
     $check = $obj->loginCheck($_POST["username"], $_POST["password"]);
     if($check){
         session_start();
-        $_SESSION["username"] = $_POST["username"] ?>
+        $_SESSION["username"] = $_POST["username"];
+        $_SESSION["user_id"] = $check;
+       ?>
+
         <script>
             alert ("歡迎! <?php echo $_POST["username"];?>")
             window.location.href="post.php";
