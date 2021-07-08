@@ -14,7 +14,7 @@ class DatabaseFunction
             die();
         }
     }
-    public function get_username($ID)
+    public function getUsername($ID)
     {
         $squery = "SELECT `username` FROM `user` WHERE `id` = '$ID'";
         $r = $this->db_link->query($squery);
@@ -23,7 +23,7 @@ class DatabaseFunction
         return $result[0][0];
     }
 
-    public function get_board_message()
+    public function getBoardMessage()
     {
         $db_result = $this->db_link->query("SELECT * FROM `board` ORDER BY `post_time` DESC LIMIT 0,100");
 
@@ -36,7 +36,7 @@ class DatabaseFunction
     //  有 sql injection 問題
     // Solution
     // https://www.php.net/manual/en/pdo.prepared-statements.php
-    public function new_message($mes, $user_id)
+    public function newMessage($mes, $user_id)
     {
         $squery = "INSERT INTO `board`(`id`, `message`, `post_time`, `user_id`) VALUES (NULL,:mes,now(),:user_id)";
         $stmt = $this->db_link->prepare($squery);
@@ -45,7 +45,7 @@ class DatabaseFunction
         $stmt->execute();
 
     }
-    public function new_user($username, $password)
+    public function newUser($username, $password)
     {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         echo $hash;
@@ -55,7 +55,7 @@ class DatabaseFunction
         $stmt->bindParam(':password', $hash);
         $stmt->execute();
     }
-    public function check_username($username): bool
+    public function checkUsername($username): bool
     {
         $squery = "SELECT * FROM `user` WHERE `username` = :username";
         $stmt = $this->db_link->prepare($squery);
@@ -70,7 +70,7 @@ class DatabaseFunction
             return false;
         }
     }
-    public  function login_check($username, $password): bool
+    public  function loginCheck($username, $password): bool
     {
            $squery = "SELECT * FROM `user` WHERE `username` = :username";
            $stmt = $this->db_link->prepare($squery);

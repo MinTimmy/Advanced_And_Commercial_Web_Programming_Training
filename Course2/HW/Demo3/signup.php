@@ -25,8 +25,8 @@ if(isset($_POST["submit"])){
     }
 
     else{
-        if($obj->check_username($_POST["username"])){
-            $obj->new_user($_POST["username"], $_POST["psw"]);
+        if($obj->checkUsername($_POST["username"])){
+            $obj->newUser($_POST["username"], $_POST["psw"]);
             echo "註冊成功";
 //            header("Location: login.php");
         }

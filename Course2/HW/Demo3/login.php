@@ -21,7 +21,7 @@ if(isset($_POST["submit"])){
 
     $obj = new DatabaseFunction();
 
-    $check = $obj->login_check($_POST["username"], $_POST["password"]);
+    $check = $obj->loginCheck($_POST["username"], $_POST["password"]);
     if($check){
         session_start();
         $_SESSION["username"] = $_POST["username"] ?>

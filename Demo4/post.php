@@ -19,32 +19,35 @@
 <?php
 
 include("DataManager.php");
+include ("./api/all_post.php");
+
 $obj = new DatabaseFunction();
 if(isset($_POST["submit"]) and  !empty($_POST["textarea1"])){
     if(strlen($_POST["textarea1"]) <= 140){
-        $obj->new_message($_POST["textarea1"], $_SESSION["PID"]);
+        $obj->newMessage($_POST["textarea1"], $_SESSION["PID"]);
     }
     else{?>
         <script> alert("字數不可以超過140") </script>
 <?php
     }
 }
-refresh_board($obj);
+refreshBoard($obj);
 
 
-function refresh_board($obj)
+function refreshBoard($obj)
 {
-    $board_message = $obj->get_board_message(); ?>
-    <div id="board" style="border: 1px solid black;" align="center">
-        <?php foreach($board_message as $data){ ?>
-            <div id="subboard">
-                <?php $user_name = $obj->get_username($data["user_id"]);?>
-                <p align="left"> <?php echo $user_name ?></p>
-                <p align="center"> <?php echo $data["message"] ?> </p>
-                <p align="right"> <?php echo $data["post_time"] ?> </p>
-            </div>
-    <?php 
-    }
+    $board_message = $obj->getBoardMessage(); ?>
+
+<!--    <div id="board" style="border: 1px solid black;" align="center">-->
+<!--        --><?php //foreach($board_message as $data){ ?>
+<!--            <div id="subboard">-->
+<!--                --><?php //$user_name = $obj->getUsername($data["user_id"]);?>
+<!--                <p align="left"> --><?php //echo $user_name ?><!--</p>-->
+<!--                <p align="center"> --><?php //echo $data["message"] ?><!-- </p>-->
+<!--                <p align="right"> --><?php //echo $data["post_time"] ?><!-- </p>-->
+<!--            </div>-->
+<!--    --><?php //
+//    }
 }
 ?>
     </body>
